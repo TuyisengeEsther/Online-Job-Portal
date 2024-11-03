@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Job Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    header {
+      background: #0056b3;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    /* Navigation Bar */
+    nav {
+      background-color: #004494;
+      padding: 10px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 15px;
+      transition: background 0.3s;
+    }
+    nav ul li a:hover {
+      background: #ff5733;
+      border-radius: 5px;
+    }
+    .hero {
+      height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      background: url('https://example.com/hero-image.jpg') no-repeat center center/cover;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .cta {
+      padding: 10px 30px;
+      background: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero .cta:hover {
+      background: #ff6f4f;
+    }
+    .login-section {
+      background: white;
+      padding: 50px 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 20px auto;
+      max-width: 500px; /* Center and constrain the width */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .login-section form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .login-section label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      text-align: left;
+      width: 100%;
+    }
+    .login-section input {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .login-section .submit-btn {
+      padding: 10px 30px;
+      background: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .login-section .submit-btn:hover {
+      background: #ff6f4f;
+    }
+    .forgot-password {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .job-listings {
+      background: #f4f4f4;
+      padding: 50px 20px;
+    }
+    .job-listings h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      display: flex;
+    }
+    .job-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .footer {
+      background: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <h1>Welcome to Our Online Job Portal</h1>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li> <!-- Home page link -->
+      <li><a th:href="@{/login}">Login</a></li> <!-- Link to login page -->
+      <li><a th:href="@{/signup}">Sign Up</a></li> <!-- Link to signup page -->
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h2>Your Dream Job Awaits</h2>
+  <p>Find and apply for jobs that match your skills and interests.</p>
+  <button class="cta">Browse Job Listings</button>
+</section>
+<!-- Login Section -->
+<section class="login-section">
+  <h2>Login</h2>
+  <div th:if="${errorMessage}" style="color: red; text-align: center; margin-bottom: 20px;">
+    <p th:text="${errorMessage}"></p>
+  </div>
+  <form action="/login" method="POST">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit" class="submit-btn">Login</button>
+  </form>
+
+  <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+  <p class="forgot-password"><a href="/forgot-password">Forgot Password?</a></p> <!-- Forgot Password link -->
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 Online Job Portal | All rights reserved</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Role</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        /* Header Styling */
+        header {
+            background: linear-gradient(to right, #0056b3, #004494);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        /* Form Styling */
+        .form-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .submit-button {
+            background: #0056b3;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        .submit-button:hover {
+            background: #004494;
+        }
+        .button {
+            padding: 10px 15px;
+            background: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #ff6f4f;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+    <h1>Add New Role</h1>
+</header>
+<div style="text-align: center; margin: 20px;">
+    <a th:href="@{/AdminDashboard}" class="button">Back Dashboard</a>
+    <a th:href="@{/roles}" class="button">View All Roles</a> <!-- New Link -->
+</div>
+<!-- Form Section -->
+<div class="form-container">
+    <div th:if="${errorMessage}" style="color: red; text-align: center; margin-bottom: 20px;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <form th:action="@{/roles}" method="post">
+        <div class="form-group">
+            <label for="name">Role Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="allowedMenus">Allowed Menus (comma separated):</label>
+            <input type="text" id="allowedMenus" name="allowedMenus" placeholder="Menu1, Menu2">
+        </div>
+        <button type="submit" class="submit-button">Add Role</button>
+    </form>
+</div>
+
+</body>
+</html>

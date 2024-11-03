@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      line-height: 1.6;
+    }
+    /* Header Styling */
+    header {
+      background: linear-gradient(to right, #0056b3, #004494);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    /* Logout Button */
+    .logout-container {
+      position: absolute;
+      right: 30px;
+      top: 30px;
+    }
+    .button {
+      padding: 10px 15px;
+      background: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    .button:hover {
+      background: #ff6f4f;
+    }
+    /* Table Styling */
+    table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th {
+
+      color: white;
+      padding: 5px;
+    }
+    td {
+      padding: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    /* Action Button Group */
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    /* Search Section */
+    .search-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .search-container input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      table, th, td {
+        font-size: 0.9rem;
+      }
+      .logout-container {
+        top: 15px;
+        right: 15px;
+      }
+    }
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .pagination-button,
+    .pagination-number {
+      padding: 8px 12px;
+      margin: 0 4px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #333;
+      background-color: #f0f0f0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pagination-button:hover,
+    .pagination-number:hover {
+      background-color: #0056b3;
+      color: #fff;
+    }
+
+    .pagination-number.active {
+      background-color: #004494;
+      color: white;
+      font-weight: bold;
+    }
+    .upload-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .upload-container input[type="file"] {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+  <h1>Admin Dashboard</h1>
+  <p>Logged in as: <span th:text="${username}">Admin</span></p>
+  <div class="logout-container">
+    <a th:href="@{/login}" class="button">Logout</a>
+  </div>
+</header>
+
+<div style="text-align: center;padding: 20px; margin-left: 10%;  display: flex ">
+  <a th:href="@{/roles/add}" class="button">Add New Role</a>&nbsp;&nbsp;&nbsp;
+  <a th:href="@{/roles}" class="button">View All Roles</a>&nbsp;&nbsp;&nbsp; <!-- New Link -->
+  <a th:href="@{/upload}" class="button">Upload File </a>&nbsp;&nbsp;&nbsp; <!-- New Link -->
+  <a th:href="@{/refresh}" class="button">Refresh</a>
+  &nbsp; <!-- New Link -->
+  <div class="search-container">
+    <form th:action="@{/admin/users}" method="get">
+      <input type="text" name="search" placeholder="Search by username or email" th:value="${search}" />
+      <button type="submit" class="button">Search</button>
+    </form>
+
+  </div>
+</div>
+
+<!-- Search Section -->
+
+
+<!-- Table Section -->
+<!-- Table Section -->
+<table>
+  <thead>
+  <tr>
+    <th><a th:href="@{/admin/users(sortField='id', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">ID</a></th>
+    <th><a th:href="@{/admin/users(sortField='username', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">Username</a></th>
+    <th><a th:href="@{/admin/users(sortField='email', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">Email</a></th>
+    <th><a th:href="@{/admin/users(sortField='firstName', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">First Name</a></th>
+    <th><a th:href="@{/admin/users(sortField='lastName', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">Last Name</a></th>
+    <th><a th:href="@{/admin/users(sortField='dob', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">Date of Birth</a></th>
+    <th><a th:href="@{/admin/users(sortField='phone', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">Phone Number</a></th>
+    <th><a th:href="@{/admin/users(sortField='role', sortDir=${reverseSortDir}, page=${currentPage}, search=${search})}">Role</a></th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users_data}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.username}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.firstName}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.dob}"></td>
+    <td th:text="${user.phone}"></td>
+    <td th:text="${user.role}"></td>
+    <td class="action-buttons">
+      <a th:href="@{/edit/{id}(id=${user.id})}" class="button">Edit</a>
+      <a th:href="@{/delete/{id}(id=${user.id})}" class="button" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="pagination-container">
+  <span th:if="${currentPage > 0}">
+    <a th:href="@{/admin/users(search=${search}, page=${currentPage - 1}, sortField=${sortField}, sortDir=${sortDir})}" class="pagination-button">Previous</a>
+  </span>
+
+  <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+    <a th:href="@{/admin/users(search=${search}, page=${i}, sortField=${sortField}, sortDir=${sortDir})}"
+       th:text="${i + 1}"
+       th:classappend="${i == currentPage} ? 'active' : ''"
+       class="pagination-number"></a>
+  </span>
+
+  <span th:if="${currentPage < totalPages - 1}">
+    <a th:href="@{/admin/users(search=${search}, page=${currentPage + 1}, sortField=${sortField}, sortDir=${sortDir})}" class="pagination-button">Next</a>
+  </span>
+</div>
+
+
+
+</body>
+</html>

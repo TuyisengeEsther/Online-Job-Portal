@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Job Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    header {
+      background: #0056b3;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    /* Navigation Bar */
+    nav {
+      background-color: #004494;
+      padding: 10px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 15px;
+      transition: background 0.3s;
+    }
+    nav ul li a:hover {
+      background: #ff5733;
+      border-radius: 5px;
+    }
+    .hero {
+      height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      padding: 0 20px;
+      background: url('https://example.com/hero-image.jpg') no-repeat center center/cover;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .cta {
+      padding: 10px 30px;
+      background: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero .cta:hover {
+      background: #ff6f4f;
+    }
+    .about {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .about p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .job-listings {
+      background: #f4f4f4;
+      padding: 50px 20px;
+
+    }
+    .job-listings h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      display: flex;
+    }
+    .job-item {
+      background: white;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 20%;
+      text-align: center;
+
+    }
+    .job-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .footer {
+      background: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <h1>Welcome to Our Online Job Portal</h1>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li> <!-- Home page link -->
+      <li><a th:href="@{/login}">Login</a></li> <!-- Link to login page -->
+      <li><a th:href="@{/signup}">Sign Up</a></li> <!-- Link to signup page -->
+      <li><a th:href="@{/change-language(lang='en')}">English</a> |</li>
+      <li><a th:href="@{/change-language(lang='fr')}">French</a> |</li>
+      <li><a th:href="@{/change-language(lang='es')}">Spanish</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h2>Your Dream Job Awaits</h2>
+  <p>Find and apply for jobs that match your skills and interests.</p>
+  <button class="cta">Browse Job Listings</button>
+</section>
+<!-- Job Listings Section -->
+<section class="job-listings">
+  <h2>Job Listings</h2>
+  <div class="job-list">
+    <div class="job-item">
+      <h3>Software Engineer</h3>
+      <p>Location: Remote</p>
+      <p>Company: Tech Innovations</p>
+      <button class="cta">Apply Now</button>
+    </div>
+    <div class="job-item" style="margin-left: 25%;margin-top: -47vh">
+      <h3>Project Manager</h3>
+      <p>Location: New York, NY</p>
+      <p>Company: Business Solutions</p>
+      <button class="cta">Apply Now</button>
+    </div>
+    <div class="job-item" style="margin-left: 50%;margin-top: -45vh">
+      <h3>UX Designer</h3>
+      <p>Location: San Francisco, CA</p>
+      <p>Company: Creative Agency</p>
+      <button class="cta">Apply Now</button>
+    </div>
+    <div class="job-item" style="margin-left: 75%;margin-top: -45vh">
+      <h3>Data Analyst</h3>
+      <p>Location: San Francisco, CA</p>
+      <p>Company: Creative Agency</p>
+      <button class="cta">Apply Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 Online Job Portal | All rights reserved</p>
+</footer>
+</body>
+</html>
